@@ -10,7 +10,6 @@
  *   // Worker code here
  *   self.postMessage('Hello from worker')
  * })
- *
  * worker.onmessage = (e) => console.log(e.data)
  */
 export const createWorker = async (workerMain: () => void, options?: WorkerOptions) => {
