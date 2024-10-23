@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    // Enable latest features
+    "lib": ["ESNext", "DOM"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "allowJs": true,
+
+    // Bundler mode
+    "moduleResolution": "bundler",
+    // "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    // "noEmit": true,
+
+    /* Options for Emit */
+    "declaration": true /* Generate .d.ts files from TypeScript and JavaScript files in your project. */,
+    "sourceMap": true /* Create source map files for emitted JavaScript files. */,
+    "outDir": "./dist" /* Specify an output folder for all emitted files. */,
+
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // Some stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
