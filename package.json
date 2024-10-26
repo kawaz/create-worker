@@ -1,7 +1,7 @@
 {
   "name": "@kawaz/create-worker",
   "description": "Create Web Workers from inline functions without requiring separate worker files.",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "author": "kawaz",
   "license": "MIT",
   "type": "module",

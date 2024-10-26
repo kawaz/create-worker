@@ -16,6 +16,13 @@ export const createWorker = async (workerMain: () => void, options?: WorkerOptio
   if (typeof workerMain !== 'function') {
     throw new TypeError('Worker main must be a function')
   }
+
+  //
+  // At the point of calling `new Worker()`, we can't yet catch initialization errors due to CSP, etc.
+  // Therefore, we add a check in the main code running in the Worker to confirm that it has been properly initialized and is functioning.
+  // This makes it easier to catch initialization errors that are otherwise difficult to capture.
+  //
+
   /**
    * @preserve This function will be stringified at runtime, so it must not reference external variables
    */
