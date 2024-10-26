@@ -98,11 +98,12 @@ const worker = await createWorker(() => {
 
 ### CSP Configuration
 
-If your site uses Content Security Policy (CSP), you'll need:
+If your site uses Content Security Policy (CSP), you'll need to add either `data:` or `blob:` to the `worker-src` directive.
+
+Example:
 
 ```http
-worker-src 'self' blob: data:;
-script-src 'self' blob: data:;
+Content-Security-Policy: default-src 'self'; worker-src 'self' data:
 ```
 
 ## API Reference
