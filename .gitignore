@@ -1,6 +1,11 @@
 /dist
 /coverage*
-
+# playwright のデフォルト出力先
+/playwright-report
+/test-results
+# playwright のカスタム出力先
+/tests-playwright.results
+/tests-playwright.snapshots
 
 # Logs
 logs

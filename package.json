@@ -1,10 +1,9 @@
 {
   "name": "@kawaz/create-worker",
   "description": "Create Web Workers from inline functions without requiring separate worker files.",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "author": "kawaz",
   "license": "MIT",
-
   "type": "module",
   "main": "dist/index.js",
   "module": "src/index.ts",
@@ -25,6 +24,7 @@
   },
 
   "devDependencies": {
+    "@playwright/test": "^1.48.2",
     "@types/bun": "latest",
     "typescript": "^5.6.3"
   }
