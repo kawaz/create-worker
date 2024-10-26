@@ -40,36 +40,6 @@ worker.onmessage = (e) => {
 };
 ```
 
-## Advanced Usage
-
-### Error Handling
-
-```typescript
-try {
-  const worker = await createWorker(() => {
-    // Worker code
-  });
-} catch (error) {
-  if (error instanceof AggregateError) {
-    console.error('Worker creation failed:', error.errors);
-  }
-}
-```
-
-### With Worker Options
-
-```typescript
-const worker = await createWorker(
-  () => {
-    // Worker code
-  },
-  {
-    name: 'MyWorker',
-    type: 'classic'
-  }
-);
-```
-
 ## Important Notes
 
 ### Function Restrictions
@@ -80,7 +50,7 @@ The worker function must be self-contained and cannot reference any external var
 // ❌ Bad - references external variable
 const multiplier = 2;
 const worker = await createWorker(() => {
-  self.postMessage(5 * multiplier); // This will fail
+  self.postMessage(5 * multiplier); // This will fail. ReferenceError: multiplier is not defined
 });
 
 // ✅ Good - all variables are contained within the function
@@ -90,7 +60,7 @@ const worker = await createWorker(() => {
 });
 ```
 
-### Security
+## Security
 
 - Never pass untrusted functions to `createWorker`
 - Be aware that the function code will be converted to a string
