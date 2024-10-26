@@ -10,5 +10,9 @@ pre-push:
   commands:
     lint:
       run: bun run lint
+    build:
+      run: bun run build
     test:
-      run: bun run test
+      run: bun run test:all
+    coverage:
+      run: bun run coverage

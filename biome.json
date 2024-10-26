@@ -22,6 +22,6 @@
     }
   },
   "files": {
-    "ignore": ["dist", "coverage*"]
+    "ignore": ["dist", "dist.*", "coverage*"]
   }
 }

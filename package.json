@@ -1,10 +1,9 @@
 {
   "name": "@kawaz/create-worker",
   "description": "Create Web Workers from inline functions without requiring separate worker files.",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "author": "kawaz",
   "license": "MIT",
-
   "type": "module",
   "main": "dist/index.js",
   "module": "src/index.ts",
@@ -18,13 +17,19 @@
 
   "scripts": {
     "build": "bun exec 'rm -rf dist' && bunx tsc",
-    "test": "bun test --coverage",
+    "test": "bun run test:bun",
+    "test:bun": "bun test --coverage --coverage-dir dist.coverage",
+    "test:watch": "bun test --coverage --coverage-dir dist.coverage --watch",
+    "test:all": "bun run test:bun && bun run test:playwright",
+    "test:playwright": "bunx playwright test",
     "lint": "bunx @biomejs/biome check . --write",
-    "coverage": "bun exec 'bunx typescript-coverage-report 2>/dev/null'",
-    "prepublishOnly": "bun run lint && bun run test && bun run build"
+    "coverage": "bun exec 'bunx typescript-coverage-report --outputDir dist.coverage-ts 2>/dev/null'",
+    "prepublishOnly": "bun run lint && bun run build && bun run test:all && bun run coverage",
+    "pretest:playwright": "bun run build"
   },
 
   "devDependencies": {
+    "@playwright/test": "^1.48.2",
     "@types/bun": "latest",
     "typescript": "^5.6.3"
   }
