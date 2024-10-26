@@ -17,10 +17,14 @@
 
   "scripts": {
     "build": "bun exec 'rm -rf dist' && bunx tsc",
-    "test": "bun test --coverage",
+    "test": "bun run test:bun",
+    "test:bun": "bun test --coverage",
+    "test:watch": "bun test --coverage --watch",
+    "test:all": "bun run test:bun && bun run test:playwright",
+    "test:playwright": "bunx playwright test",
     "lint": "bunx @biomejs/biome check . --write",
     "coverage": "bun exec 'bunx typescript-coverage-report 2>/dev/null'",
-    "prepublishOnly": "bun run lint && bun run test && bun run build"
+    "prepublishOnly": "bun run lint && bun run build && bun run test:all && bun run coverage"
   },
 
   "devDependencies": {
