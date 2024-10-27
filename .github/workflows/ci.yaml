@@ -26,6 +26,7 @@ jobs:
           path: |
             ~/.bun/install/cache
             node_modules
+            ~/.cache/ms-playwright
           key: ${{ runner.os }}-bun-${{ steps.bun-version.outputs.version }}-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
             ${{ runner.os }}-bun-${{ steps.bun-version.outputs.version }}-
