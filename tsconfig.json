@@ -16,8 +16,10 @@
 
     /* Options for Emit */
     "declaration": true /* Generate .d.ts files from TypeScript and JavaScript files in your project. */,
+    "declarationMap": true /* Create source maps for declaration files. */,
     "sourceMap": true /* Create source map files for emitted JavaScript files. */,
     "outDir": "./dist" /* Specify an output folder for all emitted files. */,
+    "removeComments": false,
 
     // Best practices
     "strict": true,
