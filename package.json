@@ -16,15 +16,16 @@
   "bugs": { "url": "https://github.com/kawaz/create-worker/issues" },
 
   "scripts": {
-    "build": "bun exec 'rm -rf dist' && bunx tsc",
-    "test": "bun run test:bun",
+    "build": "bunx tsc",
+    "test": "bun run test:all",
+    "test:all": "bun run test:bun && bun run test:playwright",
     "test:bun": "bun test --coverage --coverage-dir dist.coverage",
     "test:watch": "bun test --coverage --coverage-dir dist.coverage --watch",
-    "test:all": "bun run test:bun && bun run test:playwright",
-    "test:playwright": "bunx playwright test",
+    "test:playwright": "bunx playwright install --with-deps && bunx playwright test",
     "lint": "bunx @biomejs/biome check . --write",
+    "lint:ci": "bunx @biomejs/biome ci .",
     "coverage": "bun exec 'bunx typescript-coverage-report --outputDir dist.coverage-ts 2>/dev/null'",
-    "prepublishOnly": "bun run lint && bun run build && bun run test:all && bun run coverage",
+    "prepare": "bun exec 'rm -rf dist' && bun run lint:ci && bun run build && bun run test",
     "pretest:playwright": "bun run build"
   },
 
