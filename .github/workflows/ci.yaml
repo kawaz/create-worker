@@ -15,9 +15,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-      - name: install
-        run: bun install
-      - name: lint
-        run: bun lint:ci
-      - name: test
-        run: bun test:all
+
+      - name: Cache bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - run: bun install
+      - run: bun run lint:ci
+      - run: bun run build
+      - run: bun run test:all
