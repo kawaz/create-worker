@@ -25,8 +25,7 @@
     "lint": "bunx @biomejs/biome check . --write",
     "lint:ci": "bunx @biomejs/biome ci .",
     "coverage": "bun exec 'bunx typescript-coverage-report --outputDir dist.coverage-ts 2>/dev/null'",
-    "prepare": "bun exec 'rm -rf dist' && bun run lint:ci && bun run build && bun run test",
-    "pretest:playwright": "bun run build"
+    "prepublishOnly": "bun exec 'rm -rf dist' && bun run lint:ci && bun run build && bun run test"
   },
 
   "devDependencies": {
