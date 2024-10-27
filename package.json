@@ -21,7 +21,7 @@
     "test:all": "bun run test:bun && bun run test:playwright",
     "test:bun": "bun test --coverage --coverage-dir dist.coverage",
     "test:watch": "bun test --coverage --coverage-dir dist.coverage --watch",
-    "test:playwright": "bunx playwright install --with-deps && bunx playwright test",
+    "test:playwright": "bunx playwright install --with-deps && bunx playwright test --quiet",
     "lint": "bunx @biomejs/biome check . --write",
     "lint:ci": "bunx @biomejs/biome ci .",
     "coverage": "bun exec 'bunx typescript-coverage-report --outputDir dist.coverage-ts 2>/dev/null'",
