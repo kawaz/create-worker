@@ -20,10 +20,9 @@
     "build:types": "bunx tsc --emitDeclarationOnly",
     "test": "bun test",
     "test:playwright": "bunx playwright install --with-deps && bunx playwright test",
-    "lint": "bunx @biomejs/biome ci .",
-    "lint:fix": "bunx @biomejs/biome check . --write",
-    "coverage": "bun exec 'bunx typescript-coverage-report --outputDir dist.coverage-ts 2>/dev/null'",
-    "prepublishOnly": "bun exec 'rm -rf lib dist dist' && bun run lint && bun run build && bun run build:types && bun run test && bun run test:playwright"
+    "lint": "bunx @biomejs/biome check . --write",
+    "coverage": "bun exec 'bunx typescript-coverage-report 2>/dev/null'",
+    "prepublishOnly": "bun exec 'rm -rf lib dist' && bun run lint && bun run build && bun run build:types && bun run test && bun run test:playwright && bun run coverage"
   },
 
   "devDependencies": {

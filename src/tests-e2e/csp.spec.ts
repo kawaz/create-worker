@@ -79,13 +79,14 @@ const testCases = [
 
 const runServer = () =>
   new Promise<http.Server>((resolve) => {
+    const jsPath = 'lib/index.js'
     const server = http
       .createServer(async (req, res) => {
         const path = req.url?.split('?')[0]
         if (path === '/index.js') {
           res
             .writeHead(200, { 'Content-Type': 'application/javascript' })
-            .end(await fs.readFile('./dist/index.js'))
+            .end(await fs.readFile(jsPath))
           return
         }
         const testCase = testCases.find((p) => p.path === path) ?? testCases[0]

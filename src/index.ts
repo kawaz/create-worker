@@ -50,7 +50,7 @@ export const createWorker = async (workerMain: () => void, options?: WorkerOptio
       return await new Promise<Worker>((resolve, reject) => {
         worker.onerror = (e: ErrorEvent) => {
           cleanupUrl()
-          reject(e.error)
+          reject(e)
         }
         worker.onmessage = (e: MessageEvent<string>) => {
           cleanupUrl()

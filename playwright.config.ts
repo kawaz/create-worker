@@ -12,7 +12,11 @@ import { defineConfig, devices } from '@playwright/test'
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: 'playwright-tests',
+  // testDir: 'tests',
+  testMatch: [
+    '**/*@(e2e|playwright)*/**/*.@(spec|test).ts',
+    '**/*@(e2e|playwright).@(spec|test).ts',
+  ],
   /* Run tests in files in parallel */
   // 並列実行しないほうが速いぽいので有効にしない
   fullyParallel: false,
@@ -23,22 +27,12 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ['list'],
-    [
-      'html',
-      { outputFile: 'dist.playwright-report/index.html', outputFolder: 'dist.playwright-report' },
-    ],
-    [
-      'json',
-      { outputFile: 'dist.playwright-report/result.json', outputFolder: 'dist.playwright-report' },
-    ],
-  ],
+  reporter: [['list'], ['html']],
 
   // デフォルトは test-results だが playwright 関連ファイルと分かりやすいよう変更
-  outputDir: 'dist.playwright-results',
+  outputDir: 'playwright-results',
   // デフォルトは snapshots だが playwright 関連ファイルと分かりやすいよう変更
-  snapshotDir: 'dist.playwright-snapshots',
+  snapshotDir: 'playwright-snapshots',
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
