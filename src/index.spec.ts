@@ -26,7 +26,7 @@ describe('createWorker', () => {
       })
       const waitPromise = new Promise((resolve, reject) => {
         setTimeout(reject, 50)
-        worker.onerror = (e: ErrorEvent) => {
+        worker.onerror = () => {
           // Cannot verify details of unhandled error
           resolve('done')
         }

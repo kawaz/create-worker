@@ -32,6 +32,8 @@ jobs:
             ${{ runner.os }}-bun-${{ steps.bun-version.outputs.version }}-
 
       - run: bun install
-      - run: bun run lint:ci
+      - run: bun run lint
       - run: bun run build
-      - run: bun run test:all
+      - run: bun run test
+      - run: bun run test:playwright
+      - run: bun run coverage

@@ -77,30 +77,30 @@ const testCases = [
   },
 ]
 
-const runServer = () =>
-  new Promise<http.Server>((resolve) => {
+const runServer = async () => {
+  const jsPath = 'lib/index.js'
+  const jsContent = await fs.readFile(jsPath, 'utf-8')
+  return new Promise<http.Server>((resolve) => {
     const server = http
-      .createServer(async (req, res) => {
+      .createServer((req, res) => {
         const path = req.url?.split('?')[0]
         if (path === '/index.js') {
-          res
-            .writeHead(200, { 'Content-Type': 'application/javascript' })
-            .end(await fs.readFile('./dist/index.js'))
+          res.writeHead(200, { 'Content-Type': 'application/javascript' }).end(jsContent)
           return
         }
         const testCase = testCases.find((p) => p.path === path) ?? testCases[0]
-        res
-          .writeHead(200, {
-            'Content-Type': 'text/html',
-            ...(testCase.csp ? { 'Content-Security-Policy': testCase.csp } : {}),
-          })
-          .end()
+        const headers = {
+          'Content-Type': 'text/html',
+          ...(testCase.csp ? { 'Content-Security-Policy': testCase.csp } : {}),
+        }
+        res.writeHead(200, headers).end(testCase.name)
         return
       })
       .listen(() => {
         resolve(server)
       })
   })
+}
 
 const runTests = async () => {
   let server: http.Server
@@ -112,7 +112,7 @@ const runTests = async () => {
   })
 
   test.afterAll(async () => {
-    await server.close()
+    await server?.close()
   })
 
   test.describe('CSP Test Cases', () => {

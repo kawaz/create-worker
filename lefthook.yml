@@ -13,6 +13,8 @@ pre-push:
     build:
       run: bun run build
     test:
-      run: bun run test:all
+      run: bun run test
+    test:playwright:
+      run: bun run test:playwright
     coverage:
       run: bun run coverage
