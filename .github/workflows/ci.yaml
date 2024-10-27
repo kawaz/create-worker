@@ -16,15 +16,19 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
 
+      - name: Get Bun version
+        id: bun-version
+        run: echo "version=$(bun --version)" >> $GITHUB_OUTPUT
+
       - name: Cache bun dependencies
         uses: actions/cache@v4
         with:
           path: |
             ~/.bun/install/cache
             node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          key: ${{ runner.os }}-bun-${{ steps.bun-version.outputs.version }}-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
-            ${{ runner.os }}-bun-
+            ${{ runner.os }}-bun-${{ steps.bun-version.outputs.version }}-
 
       - run: bun install
       - run: bun run lint:ci
