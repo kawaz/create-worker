@@ -50,6 +50,6 @@ jobs:
           git push --tags
 
       - name: Publish to npm
-        run: npm run publish
+        run: npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
