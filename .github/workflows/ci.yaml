@@ -1,3 +1,4 @@
+# .github/workflows/ci.yml
 name: CI
 
 on:
@@ -13,27 +14,8 @@ jobs:
     name: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Get Bun version
-        id: bun-version
-        run: echo "version=$(bun --version)" >> $GITHUB_OUTPUT
-
-      - name: Cache bun dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.bun/install/cache
-            node_modules
-            ~/.cache/ms-playwright
-          key: ${{ runner.os }}-bun-${{ steps.bun-version.outputs.version }}-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-${{ steps.bun-version.outputs.version }}-
-
-      - run: bun install
-      - run: bun run lint
-      - run: bun run build
-      - run: bun run test
-      - run: bun run test:playwright
-      - run: bun run coverage
+      - name: Build and test
+        uses: ./.github/actions/build-and-test

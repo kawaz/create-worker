@@ -1,0 +1,55 @@
+# .github/workflows/auto-publish.yml
+name: Auto Publish
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  publish:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup, Build and Test
+        uses: ./.github/actions/build-and-test
+        with:
+          run-playwright: 'false'
+          run-coverage: 'false'
+
+      - name: Git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Update version
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [[ "$PR_TITLE" =~ ^\[major\] ]]; then
+            echo "Bumping major version"
+            npm version major
+          elif [[ "$PR_TITLE" =~ ^\[minor\] ]]; then
+            echo "Bumping minor version"
+            npm version minor
+          else
+            echo "Bumping patch version"
+            npm version patch
+          fi
+
+      - name: Push changes
+        run: |
+          git push
+          git push --tags
+
+      - name: Publish to npm
+        run: npm run publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
