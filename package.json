@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kawaz/create-worker"
+    "url": "git+https://github.com/kawaz/create-worker.git"
   },
   "homepage": "https://github.com/kawaz/create-worker#readme",
   "bugs": {
