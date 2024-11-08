@@ -6,8 +6,7 @@
 /playwright-report
 /test-results
 # playwright のカスタム出力先
-/playwright-results
-/playwright-snapshots
+/.playwright-*
 
 # Logs
 logs
