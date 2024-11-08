@@ -2,14 +2,6 @@ name: 'Bun Setup, build and test'
 description: 'Sets up Bun, installs dependencies, runs tests and builds'
 
 inputs:
-  fetch-depth:
-    description: 'Number of commits to fetch'
-    default: '1'
-    required: false
-  token:
-    description: 'GitHub token'
-    default: ${{ github.token }}
-    required: false
   run-playwright:
     description: 'Whether to run Playwright tests'
     default: 'true'
@@ -22,18 +14,11 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: ${{ inputs.fetch-depth }}
-        token: ${{ inputs.token }}
-
     - name: Setup Bun
       uses: oven-sh/setup-bun@v2
 
     - name: Get Bun version
       id: bun-version
-      shell: bash
       run: echo "version=$(bun --version)" >> $GITHUB_OUTPUT
 
     - name: Cache bun dependencies
@@ -49,27 +34,21 @@ runs:
           ${{ runner.os }}-bun-${{ steps.bun-version.outputs.version }}-
 
     - name: Install dependencies
-      shell: bash
       run: bun install
 
     - name: Lint
-      shell: bash
       run: bun run lint
 
     - name: Build
-      shell: bash
       run: bun run build
 
     - name: Run tests
-      shell: bash
       run: bun run test
 
     - name: Run Playwright tests
       if: inputs.run-playwright == 'true'
-      shell: bash
       run: bun run test:playwright
 
     - name: Run coverage
       if: inputs.run-coverage == 'true'
-      shell: bash
       run: bun run coverage

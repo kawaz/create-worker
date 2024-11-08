@@ -14,5 +14,8 @@ jobs:
     name: test
     runs-on: ubuntu-latest
     steps:
-      - name: Run tests
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build and test
         uses: ./.github/actions/build-and-test
