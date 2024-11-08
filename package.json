@@ -8,18 +8,8 @@
   "main": "lib/index.js",
   "module": "src/index.ts",
   "types": "lib/index.d.ts",
-  "files": [
-    "lib",
-    "src/**/*.ts",
-    "!**/*.test.*",
-    "!**/*.spec.*"
-  ],
-  "keywords": [
-    "worker",
-    "createWorker",
-    "csp",
-    "content-security-policy"
-  ],
+  "files": ["lib", "src/**/*.ts", "!**/*.test.*", "!**/*.spec.*"],
+  "keywords": ["worker", "createWorker", "csp", "content-security-policy"],
   "publishConfig": {
     "access": "public"
   },
