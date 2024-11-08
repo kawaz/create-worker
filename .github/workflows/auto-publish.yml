@@ -11,6 +11,9 @@ jobs:
   publish:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
     steps:
       - name: Setup, Build and Test
         uses: ./.github/actions/build-and-test
