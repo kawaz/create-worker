@@ -16,7 +16,7 @@
   "bugs": { "url": "https://github.com/kawaz/create-worker/issues" },
 
   "scripts": {
-    "build": "bun build src/index.ts --outdir=lib --sourcemap=linked --minify",
+    "build": "bun build src/index.ts --outdir=lib --minify",
     "build:types": "bunx tsc --emitDeclarationOnly",
     "test": "bun test",
     "test:playwright": "bunx playwright install --with-deps && bunx playwright test",
