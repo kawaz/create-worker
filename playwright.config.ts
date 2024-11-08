@@ -32,13 +32,21 @@ export default defineConfig({
   // workers: process.env.CI ? 1 : undefined,
 
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['list'], ['html']],
+  reporter: [
+    ['list'],
+    [
+      'html',
+      {
+        // レポート出力先をデフォルトの playwright-report から変更。Playwright固有のファイルであることを明示しつつ目立たなくする
+        outputFolder: '.playwright-report',
+      },
+    ],
+  ],
 
-  // テスト結果の出力先をデフォルトの test-results から変更。Playwright固有のファイルであることを明示
-  outputDir: 'playwright-results',
-
-  // スナップショットの保存先をデフォルトの snapshots から変更。Playwright固有のファイルであることを明示
-  snapshotDir: 'playwright-snapshots',
+  // テスト結果の出力先をデフォルトの test-results から変更。Playwright固有のファイルであることを明示しつつ目立たなくする
+  outputDir: '.playwright-results',
+  // スナップショットの保存先をデフォルトの snapshots から変更。Playwright固有のファイルであることを明示しつつ目立たなくする
+  snapshotDir: '.playwright-snapshots',
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
