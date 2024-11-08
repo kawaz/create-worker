@@ -44,12 +44,16 @@ jobs:
             npm version patch
           fi
 
-      - name: Push changes
+      - name: Format and amend package.json
         run: |
-          git push
-          git push --tags
+          bun run lint:fix
+          git add package.json
+          git commit --amend --no-edit
+
+      - name: Push changes
+        run: git push --follow-tags
 
       - name: Publish to npm
-        run: npm run publish
+        run: npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
