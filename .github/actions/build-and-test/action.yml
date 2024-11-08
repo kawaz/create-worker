@@ -19,6 +19,7 @@ runs:
 
     - name: Get Bun version
       id: bun-version
+      shell: bash
       run: echo "version=$(bun --version)" >> $GITHUB_OUTPUT
 
     - name: Cache bun dependencies
@@ -34,21 +35,27 @@ runs:
           ${{ runner.os }}-bun-${{ steps.bun-version.outputs.version }}-
 
     - name: Install dependencies
+      shell: bash
       run: bun install
 
     - name: Lint
+      shell: bash
       run: bun run lint
 
     - name: Build
+      shell: bash
       run: bun run build
 
     - name: Run tests
+      shell: bash
       run: bun run test
 
     - name: Run Playwright tests
       if: inputs.run-playwright == 'true'
+      shell: bash
       run: bun run test:playwright
 
     - name: Run coverage
       if: inputs.run-coverage == 'true'
+      shell: bash
       run: bun run coverage
